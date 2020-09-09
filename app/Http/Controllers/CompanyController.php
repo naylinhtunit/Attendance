@@ -44,27 +44,17 @@ class CompanyController extends Controller
             'start_pay_date' => 'required',
             'end_pay_date' => 'required',
         ]);
-        
-        $company_name = $request->company_name;
-        $address = $request->address;
-        $phone = $request->phone;
-        $latitude = $request->latitude;
-        $longitude = $request->longitude;
-        $start_office_hours = $request->start_office_hours;
-        $end_office_hours = $request->end_office_hours;
-        $start_pay_date = $request->start_pay_date;
-        $end_pay_date = $request->end_pay_date;
 
         $company = new Company();
-        $company->company_name = $company_name;
-        $company->address = $address;
-        $company->phone = $phone;
-        $company->latitude = $latitude;
-        $company->longitude = $longitude;
-        $company->start_office_hours = $start_office_hours;
-        $company->end_office_hours = $end_office_hours;
-        $company->start_pay_date = $start_pay_date;
-        $company->end_pay_date = $end_pay_date;
+        $company->company_name = $request->company_name;
+        $company->address = $request->address;
+        $company->phone = $request->phone;
+        $company->latitude = $request->latitude;
+        $company->longitude = $request->longitude;
+        $company->start_office_hours = $request->start_office_hours;
+        $company->end_office_hours = $request->end_office_hours;
+        $company->start_pay_date = $request->start_pay_date;
+        $company->end_pay_date = $request->end_pay_date;
 
         if ($request->hasFile('image')) {
             $file = $request->file('image');

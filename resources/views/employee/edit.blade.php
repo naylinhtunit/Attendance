@@ -54,7 +54,7 @@
 						<label>Gender</label>
 						<select name="gender" class="form-control">
 							@foreach($categories as $category)
-								<option value="{{ $category->id }}" @if($employee->gender == $category->id) selected @endif>{{ $category->id }}: {{ $category->target }}</option>
+								<option value="{{ $category->id }}" @if($employee->gender == $category->id) selected @endif>{{ $category->id }}: {{ $category->category }}</option>
 							@endforeach
 						</select>
 					</div>

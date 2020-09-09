@@ -20,7 +20,7 @@
 					@csrf
 					<div class="form-group">
 						<label for="name">Department Name</label>
-						<input type="text" name="department_name" class="form-control @error('department_name') is-invalid @enderror" id="name" placeholder="Department Name">
+						<input type="text" name="department_name" class="form-control @error('department_name') is-invalid @enderror" id="name" placeholder="Department Name" value="{{Request::old('department_name') ? : ''}}">
 						<span class="{{$errors->has('department_name') ? 'text-danger' : ''}}">{{$errors->first('department_name')}}</span>
 					</div>
 					<div class="form-group">

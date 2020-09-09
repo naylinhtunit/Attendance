@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\CommonCategory;
 use App\Company;
 use App\Leave;
 use Illuminate\Http\Request;
@@ -26,16 +27,31 @@ class LeaveController extends Controller
             $limit = '5';
         }
 
+        $categorie = CommonCategory::where('target', 'status')->first();
         $companies = Company::all();
-        $leaves = Leave::leftJoin('companies', 'companies.id', '=', 'leaves.company_id')
+        $leaves = Leave::join('companies', 'companies.id', '=', 'leaves.company_id')
+        ->join('common_categories', 'common_categories.id', '=', 'leaves.status')
         ->select(
             'leaves.*',
-            'companies.company_name'
+            'companies.company_name',
+            'common_categories.target'
             );
                
         $leaves = Leave::orderBy('id','asc')->Paginate($limit);
 
-        return view('leave.index', compact('companies', 'leaves'));
+        return view('leave.index', compact('companies', 'leaves', 'categorie'));
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function create()
+    {
+        $companies = Company::all();
+        $categories = CommonCategory::where('target', 'status')->get();
+        return view('leave.create', compact('companies', 'categories'));
     }
 
     public function store(Request $request)
@@ -44,7 +60,7 @@ class LeaveController extends Controller
             'company_id' => 'required',
             'request_date'      => 'required',
             'actual_date'      => 'required',
-            'status'      => 'required'
+            'status'      => 'required',
         ]);
   
         $leave = new Leave();
@@ -58,13 +74,27 @@ class LeaveController extends Controller
         return redirect('/leave');
     }
 
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit($id)
+    {
+        $companies = Company::all();
+        $categories = CommonCategory::where('target', 'status')->get();
+        $leave = Leave::find($id);
+        return view('leave.edit', compact('leave', 'companies', 'categories'));
+    }
+
     public function update(Request $request, $id)
     {
         $leave = Leave::Find($id);
-        $leave->company_id = $request->input('company_id');
-        $leave->request_date = $request->input('request_date');
-        $leave->actual_date = $request->input('actual_date');
-        $leave->status = $request->input('status');
+        $leave->company_id      = $request->company_id;
+        $leave->request_date = $request->request_date;
+        $leave->actual_date = $request->actual_date;
+        $leave->status = $request->status;
         $leave->save();
         
         session()->flash('msg','Selected leave has been updated!');

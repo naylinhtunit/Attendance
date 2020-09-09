@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Company;
 use App\Department;
 use App\Employee;
-use App\GenderCategory;
+use App\CommonCategory;
 use App\Role;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -47,7 +47,7 @@ class EmployeeController extends Controller
         $companies = Company::all();
         $departments = Department::all();
         $roles = Role::all();
-        $categories = GenderCategory::all();
+        $categories = CommonCategory::where('target', 'gender')->get();
         return view('employee.create', compact('companies', 'departments', 'roles', 'categories'));
     }
 
@@ -77,7 +77,7 @@ class EmployeeController extends Controller
         $companies = Company::all();
         $departments = Department::all();
         $roles = Role::all();
-        $categories = GenderCategory::all();
+        $categories = CommonCategory::where('target', 'gender')->get();
         $employee = Employee::find($id);
         return view('employee.edit', compact('employee', 'companies', 'departments', 'roles', 'categories'));
     }

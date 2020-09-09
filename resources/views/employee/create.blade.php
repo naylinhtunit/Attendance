@@ -57,7 +57,7 @@
 						<label>Gender</label>
 						<select name="gender" class="form-control @error('gender') is-invalid @enderror">
 							@foreach($categories as $category)
-								<option value="{{ $category->id }}">{{ $category->id }}: {{ $category->target }}</option>
+								<option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>
 							@endforeach
 						</select>
 						<span class="{{$errors->has('gender') ? 'text-danger' : ''}}">{{$errors->first('gender')}}</span>

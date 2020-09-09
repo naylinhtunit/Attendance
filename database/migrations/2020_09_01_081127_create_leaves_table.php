@@ -16,8 +16,8 @@ class CreateLeavesTable extends Migration
         Schema::create('leaves', function (Blueprint $table) {
             $table->id();
             $table->integer('company_id');
-            $table->integer('request_date');
-            $table->integer('actual_date');
+            $table->date('request_date');
+            $table->date('actual_date');
             $table->integer('status');
             $table->timestamps();
         });

@@ -79,6 +79,18 @@ Route::delete('leave_type/{id}', 'LeaveTypeController@destroy');
  * 
  */
 Route::get('leave', 'LeaveController@index');
+Route::get('leave/create', 'LeaveController@create');
 Route::post('leave', 'LeaveController@store');
+Route::get('leave/edit/{id}', 'LeaveController@edit');
 Route::put('leave/{id}', 'LeaveController@update');
 Route::delete('leave/{id}', 'LeaveController@destroy');
+/**
+ *  Public Leave Route
+ * 
+ */
+Route::get('attemdamce', 'AttendanceController@index');
+Route::get('attemdamce/create', 'AttendanceController@create');
+Route::post('attemdamce', 'AttendanceController@store');
+Route::get('attemdamce/edit/{id}', 'AttendanceController@edit');
+Route::put('attemdamce/{id}', 'AttendanceController@update');
+Route::delete('attemdamce/{id}', 'AttendanceController@destroy');
