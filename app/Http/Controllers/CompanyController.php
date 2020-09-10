@@ -25,8 +25,11 @@ class CompanyController extends Controller
         }else{
             $limit = '10';
         }
-
-        $companies = Company::orderBy('id','asc')->Paginate($limit);
+        
+        $keyword = $request->get('keyword');
+        $companies = Company::where('company_name', 'like', '%'.$keyword.'%')
+                            ->orwhere('phone', 'like', '%'.$keyword.'%')
+                            ->orderBy('id','asc')->Paginate($limit);
 
         return view('company.index')->with('companies',$companies);
     }

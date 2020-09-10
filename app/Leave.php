@@ -20,4 +20,9 @@ class Leave extends Model
     {
     	return $this->belongsTo(Company::class, 'company_id');
     }
+
+    public function common()
+    {
+    	return $this->belongsTo(CommonCategory::class, 'status');
+    }
 }

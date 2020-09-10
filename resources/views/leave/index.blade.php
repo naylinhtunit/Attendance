@@ -25,9 +25,9 @@
 							<td>{{ $leave->actual_date }}</td>
 							<td>
 								@if($category->id == $leave->status) 
-								<span class="badge badge-success">{{ $category->category }}</span>
+								<span class="badge badge-success">{{ $leave->common->category }}</span>
 								@else
-								<span class="badge badge-warning">{{ $category->category }}</span>
+								<span class="badge badge-warning">{{ $leave->common->category }}</span>
 								@endif
 							</td>
 							<td class="table-action">

@@ -28,7 +28,7 @@ class LeaveController extends Controller
         }
 
         $category = CommonCategory::where('target', 'status')->first();
-        $leaves = Leave::with('company')->orderBy('id','asc')->Paginate($limit);
+        $leaves = Leave::with('company', 'common')->orderBy('id','asc')->Paginate($limit);
 
         return view('leave.index', compact('leaves', 'category'));
     }

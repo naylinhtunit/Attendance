@@ -1,8 +1,16 @@
 @extends('layouts.app')
 
 @section('content')
-
-<a href="{{ URL::to('/') }}/company/create" class="btn btn-success mb-2"><i class="align-middle mr-2" data-feather="plus"></i>Add </a>
+<div class="row d-flex">
+	<div class="col-2">
+		<a href="{{ URL::to('/') }}/company/create" class="btn btn-success mb-2"><i class="align-middle mr-2" data-feather="plus"></i>Add </a>
+	</div>
+	<div class="col-10">
+		<form method="get">
+			<input type="text" name="keyword" class="form-control" placeholder="Search…" value="{{ Request::get('keyword') }}">
+		</form>
+	</div>
+</div>
 <div class="container-fluid p-0">
 	<div class="row">
 		<div class="col-12">

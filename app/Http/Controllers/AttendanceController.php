@@ -27,7 +27,9 @@ class AttendanceController extends Controller
             $limit = '10';
         }
 
-        $attendances = Attendance::with('company', 'employee')->orderBy('id','asc')->Paginate($limit);
+        $keyword = $request->get('keyword');
+        $attendances = Attendance::with('company', 'employee')
+                                ->orderBy('id','asc')->Paginate($limit);
 
         return view('attendance.index', compact('attendances'));
     }
