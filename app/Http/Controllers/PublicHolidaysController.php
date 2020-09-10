@@ -25,17 +25,16 @@ class PublicHolidaysController extends Controller
         }else{
             $limit = '5';
         }
+        
+        $holidays = PublicHolidays::with('company')->orderBy('id','asc')->Paginate($limit);
 
+        return view('holiday.index', compact('holidays'));
+    }
+    
+    public function create()
+    {
         $companies = Company::all();
-        $holidays = PublicHolidays::leftJoin('companies', 'companies.id', '=', 'public_holidays.company_id')
-        ->select(
-            'public_holidays.*',
-            'companies.company_name'
-            );
-               
-        $holidays = PublicHolidays::orderBy('id','asc')->Paginate($limit);
-
-        return view('holiday.index', compact('companies', 'holidays'));
+        return view('holiday.create', compact('companies'));
     }
 
     public function store(Request $request)
@@ -56,6 +55,13 @@ class PublicHolidaysController extends Controller
         
         session()->flash('msg','Public Holidays has been Created!');
         return redirect('/holiday');
+    }
+    
+    public function edit($id)
+    {
+        $companies = Company::all();
+        $holiday = PublicHolidays::find($id);
+        return view('holiday.edit', compact('holiday', 'companies'));
     }
 
     public function update(Request $request, $id)

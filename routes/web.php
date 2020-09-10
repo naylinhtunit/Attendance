@@ -41,7 +41,9 @@ Route::delete('company/{id}', 'CompanyController@destroy');
  * 
  */
 Route::get('department', 'DepartmentController@index');
+Route::get('department/create', 'DepartmentController@create');
 Route::post('department', 'DepartmentController@store');
+Route::get('department/edit/{id}', 'DepartmentController@edit');
 Route::put('department/{id}', 'DepartmentController@update');
 Route::delete('department/{id}', 'DepartmentController@destroy');
 /**
@@ -49,7 +51,9 @@ Route::delete('department/{id}', 'DepartmentController@destroy');
  * 
  */
 Route::get('role', 'RoleController@index');
+Route::get('role/create', 'RoleController@create');
 Route::post('role', 'RoleController@store');
+Route::get('role/edit/{id}', 'RoleController@edit');
 Route::put('role/{id}', 'RoleController@update');
 Route::delete('role/{id}', 'RoleController@destroy');
 /**
@@ -63,7 +67,9 @@ Route::post('/employee/create','EmployeeController@store')->name('employee.store
  * 
  */
 Route::get('holiday', 'PublicHolidaysController@index');
+Route::get('holiday/create', 'PublicHolidaysController@create');
 Route::post('holiday', 'PublicHolidaysController@store');
+Route::get('holiday/edit/{id}', 'PublicHolidaysController@edit');
 Route::put('holiday/{id}', 'PublicHolidaysController@update');
 Route::delete('holiday/{id}', 'PublicHolidaysController@destroy');
 /**
@@ -71,7 +77,9 @@ Route::delete('holiday/{id}', 'PublicHolidaysController@destroy');
  * 
  */
 Route::get('leave_type', 'LeaveTypeController@index');
+Route::get('leave_type/create', 'LeaveTypeController@create');
 Route::post('leave_type', 'LeaveTypeController@store');
+Route::get('leave_type/edit/{id}', 'LeaveTypeController@edit');
 Route::put('leave_type/{id}', 'LeaveTypeController@update');
 Route::delete('leave_type/{id}', 'LeaveTypeController@destroy');
 /**
@@ -88,9 +96,9 @@ Route::delete('leave/{id}', 'LeaveController@destroy');
  *  Public Leave Route
  * 
  */
-Route::get('attemdamce', 'AttendanceController@index');
-Route::get('attemdamce/create', 'AttendanceController@create');
-Route::post('attemdamce', 'AttendanceController@store');
-Route::get('attemdamce/edit/{id}', 'AttendanceController@edit');
-Route::put('attemdamce/{id}', 'AttendanceController@update');
-Route::delete('attemdamce/{id}', 'AttendanceController@destroy');
+Route::get('attendance', 'AttendanceController@index');
+Route::get('attendance/create', 'AttendanceController@create');
+Route::post('attendance', 'AttendanceController@store');
+Route::get('attendance/edit/{id}', 'AttendanceController@edit');
+Route::put('attendance/{id}', 'AttendanceController@update');
+Route::delete('attendance/{id}', 'AttendanceController@destroy');

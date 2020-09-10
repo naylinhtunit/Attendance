@@ -25,17 +25,16 @@ class DepartmentController extends Controller
         }else{
             $limit = '5';
         }
+        
+        $departments = Department::with('company')->orderBy('id','asc')->Paginate($limit);
 
+        return view('department.index', compact('departments'));
+    }
+    
+    public function create()
+    {
         $companies = Company::all();
-        $departments = Department::leftJoin('companies', 'companies.id', '=', 'departments.company_id')
-        ->select(
-            'departments.*',
-            'companies.company_name'
-            );
-               
-        $departments = Department::orderBy('id','asc')->Paginate($limit);
-
-        return view('department.index', compact('companies', 'departments'));
+        return view('department.create', compact('companies'));
     }
 
     public function store(Request $request)
@@ -52,6 +51,13 @@ class DepartmentController extends Controller
         
         session()->flash('msg','Department has been Created!');
         return redirect('/department');
+    }
+    
+    public function edit($id)
+    {
+        $companies = Company::all();
+        $department = Department::find($id);
+        return view('department.edit', compact('companies', 'department'));
     }
 
     public function update(Request $request, $id)

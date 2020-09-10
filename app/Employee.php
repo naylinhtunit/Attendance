@@ -41,4 +41,8 @@ class Employee extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function attendance(){
+        return $this->hasMany(Attendance::class, 'employee_id');
+    }
 }

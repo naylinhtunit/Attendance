@@ -26,27 +26,12 @@ class AttendanceController extends Controller
         }else{
             $limit = '5';
         }
-        
-        $companies = Company::all();
-        $employees = Employee::all();
-        $attendances = Attendance::join('companies', 'companies.id', '=', 'attendances.company_id')
-        ->join('employees', 'employees.id', '=', 'attendances.employee_id')
-        ->select(
-            'attendances.*',
-            'companies.company_name',
-            'employees.employee_name',
-            );
-               
-        $attendances = Attendance::orderBy('id','asc')->Paginate($limit);
 
-        return view('attendance.index', compact('companies', 'attendances', 'employees'));
+        $attendances = Attendance::with('company', 'employee')->orderBy('id','asc')->Paginate($limit);
+
+        return view('attendance.index', compact('attendances'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $companies = Company::all();
@@ -58,14 +43,14 @@ class AttendanceController extends Controller
     {
         $request->validate([
             'company_id' => 'required',
-            'employ_id' => 'required',
+            'employee_id' => 'required',
             'checkin_time' => 'required',
             'checkout_time' => 'required',
         ]);
   
         $attendance = new Attendance();
         $attendance->company_id      = $request->company_id;
-        $attendance->employ_id = $request->employ_id;
+        $attendance->employee_id = $request->employee_id;
         $attendance->checkin_time = $request->checkin_time;
         $attendance->checkout_time = $request->checkout_time;
         $attendance->save();
@@ -73,13 +58,7 @@ class AttendanceController extends Controller
         session()->flash('msg','Attendance has been Created!');
         return redirect('/attendance');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         $companies = Company::all();
@@ -92,7 +71,7 @@ class AttendanceController extends Controller
     {
         $attendance = Attendance::Find($id);
         $attendance->company_id      = $request->company_id;
-        $attendance->employ_id = $request->employ_id;
+        $attendance->employee_id = $request->employee_id;
         $attendance->checkin_time = $request->checkin_time;
         $attendance->checkout_time = $request->checkout_time;
         $attendance->save();

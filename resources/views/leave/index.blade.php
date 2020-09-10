@@ -20,15 +20,14 @@
 					<tbody>
 						@foreach($leaves as $leave)
 						<tr>
-							<td>{{ $leave->company_id }}: {{ $leave->company_name }}</td>
+							<td>{{ $leave->company_id }}: {{ $leave->company->company_name }}</td>
 							<td>{{ $leave->request_date }}</td>
 							<td>{{ $leave->actual_date }}</td>
 							<td>
-								{{-- {{ $leave->status }} --}}
-								@if($categorie->id == $leave->status) 
-								<span class="badge badge-success">{{ $leave->status }}</span>
+								@if($category->id == $leave->status) 
+								<span class="badge badge-success">{{ $category->category }}</span>
 								@else
-								<span class="badge badge-warning">{{ $leave->status }}</span>
+								<span class="badge badge-warning">{{ $category->category }}</span>
 								@endif
 							</td>
 							<td class="table-action">

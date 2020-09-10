@@ -17,6 +17,6 @@ class LeaveType extends Model
 
     public function company()
     {
-    	return $this->belongsTo('App\Company', 'company_id');
+    	return $this->belongsTo(Company::class, 'company_id');
     }
 }

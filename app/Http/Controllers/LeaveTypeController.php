@@ -25,17 +25,16 @@ class LeaveTypeController extends Controller
         }else{
             $limit = '5';
         }
+        
+        $leaveTypes = LeaveType::with('company')->orderBy('id','asc')->Paginate($limit);
 
+        return view('leave_type.index', compact('leaveTypes'));
+    }
+    
+    public function create()
+    {
         $companies = Company::all();
-        $leaveTypes = LeaveType::leftJoin('companies', 'companies.id', '=', 'leave_types.company_id')
-        ->select(
-            'leave_types.*',
-            'companies.company_name'
-            );
-               
-        $leaveTypes = LeaveType::orderBy('id','asc')->Paginate($limit);
-
-        return view('leave_type.index', compact('companies', 'leaveTypes'));
+        return view('leave_type.create', compact('companies'));
     }
 
     public function store(Request $request)
@@ -54,6 +53,13 @@ class LeaveTypeController extends Controller
         
         session()->flash('msg','Leave Type has been Created!');
         return redirect('/leave_type');
+    }
+    
+    public function edit($id)
+    {
+        $companies = Company::all();
+        $leave = LeaveType::find($id);
+        return view('leave_type.edit', compact('leave', 'companies'));
     }
 
     public function update(Request $request, $id)

@@ -26,20 +26,17 @@ class RoleController extends Controller
         }else{
             $limit = '5';
         }
+        
+        $roles = Role::with('company', 'department')->orderBy('id','asc')->Paginate($limit);
 
+        return view('role.index', compact('roles'));
+    }
+    
+    public function create()
+    {
         $companies = Company::all();
         $departments = Department::all();
-        $roles = Role::leftJoin('companies', 'companies.id', '=', 'roles.company_id')
-        ->leftJoin('departments', 'departments.id', '=', 'roles.department_id')
-        ->select(
-            'roles.*',
-            'companies.company_name',
-            'departments.department_name'
-            );
-               
-        $roles = Role::orderBy('id','asc')->Paginate($limit);
-
-        return view('role.index', compact('roles', 'companies', 'departments'));
+        return view('role.create', compact('companies', 'departments'));
     }
 
     public function store(Request $request)
@@ -59,6 +56,14 @@ class RoleController extends Controller
         session()->flash('msg','Role has been Created!');
         return redirect('/role');
     }
+    
+    public function edit($id)
+    {
+        $companies = Company::all();
+        $departments = Department::all();
+        $role = Role::find($id);
+        return view('role.edit', compact('role', 'companies', 'departments'));
+    }
 
     public function update(Request $request, $id)
     {
@@ -69,7 +74,7 @@ class RoleController extends Controller
         $role->save();
         
         session()->flash('msg','Selected Role has been updated!');
-        return redirect('/department');
+        return redirect('/role');
     }
 
     public function destroy($id)

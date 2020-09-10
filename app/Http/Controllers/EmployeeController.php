@@ -19,29 +19,13 @@ class EmployeeController extends Controller
     public function __construct(){
         $this->middleware('auth');
     }
-
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function index()
     {
-        /**
-         *  It works the same as employeescontroller
-         *  please see the comments for explaination
-         *  on what's going on here.
-         */
-        
         $employees = Employee::Paginate(4);
         return view('employee.index', compact('employees'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $companies = Company::all();
@@ -50,13 +34,7 @@ class EmployeeController extends Controller
         $categories = CommonCategory::where('target', 'gender')->get();
         return view('employee.create', compact('companies', 'departments', 'roles', 'categories'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(Request $request)
     {
         $employee = new Employee();
@@ -65,13 +43,7 @@ class EmployeeController extends Controller
         $this->setEmployee($request ,$employee, $fileNameToStore);
         return redirect('/employee')->with('info','New Employee has been created!');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         $companies = Company::all();
@@ -81,14 +53,7 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         return view('employee.edit', compact('employee', 'companies', 'departments', 'roles', 'categories'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(Request $request, $id)
     {
         $employee = Employee::find($id);
@@ -103,19 +68,9 @@ class EmployeeController extends Controller
         $this->setEmployee($request, $employee ,$fileNameToStore);
         return redirect('/employee')->with('info','selected Employee has been updated');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
-    {
-        // if($id == Auth::user()->id){
-        //     return redirect('/employee')->with('info','Authenticated Employee cannot be deleted!');
-        // }
-        
+    {   
         $employee = Employee::find($id);
 
         //delete the employee image

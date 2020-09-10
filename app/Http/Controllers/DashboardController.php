@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Attendance;
 use Illuminate\Http\Request;
 use App\Company;
 use App\Department;
+use App\Employee;
+use App\Leave;
+use App\LeaveType;
+use App\PublicHolidays;
 use App\Role;
 
 class DashboardController extends Controller
@@ -29,6 +34,21 @@ class DashboardController extends Controller
         $company = Company::all()->count();
         $department = Department::all()->count();
         $role = Role::all()->count();
-    	return view('index', compact('company', 'department', 'role'));
+        $employee = Employee::all()->count();
+        $holiday = PublicHolidays::all()->count();
+        $leaveType = LeaveType::all()->count();
+        $leave = Leave::all()->count();
+        $attendance = Attendance::all()->count();
+        return view('index', 
+            compact(
+                'company',
+                'department', 
+                'role',
+                'employee',
+                'holiday',
+                'leaveType',
+                'leave',
+                'attendance'
+        ));
     }
 }

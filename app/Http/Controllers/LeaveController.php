@@ -27,26 +27,12 @@ class LeaveController extends Controller
             $limit = '5';
         }
 
-        $categorie = CommonCategory::where('target', 'status')->first();
-        $companies = Company::all();
-        $leaves = Leave::join('companies', 'companies.id', '=', 'leaves.company_id')
-        ->join('common_categories', 'common_categories.id', '=', 'leaves.status')
-        ->select(
-            'leaves.*',
-            'companies.company_name',
-            'common_categories.target'
-            );
-               
-        $leaves = Leave::orderBy('id','asc')->Paginate($limit);
+        $category = CommonCategory::where('target', 'status')->first();
+        $leaves = Leave::with('company')->orderBy('id','asc')->Paginate($limit);
 
-        return view('leave.index', compact('companies', 'leaves', 'categorie'));
+        return view('leave.index', compact('leaves', 'category'));
     }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+    
     public function create()
     {
         $companies = Company::all();
@@ -73,13 +59,7 @@ class LeaveController extends Controller
         session()->flash('msg','Leave has been Created!');
         return redirect('/leave');
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit($id)
     {
         $companies = Company::all();

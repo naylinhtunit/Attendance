@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    //
     protected $table = 'roles';
     
     protected $fillable = [
@@ -17,11 +16,11 @@ class Role extends Model
 
     public function company()
     {
-    	return $this->belongsTo('App\Company', 'company_id');
+    	return $this->belongsTo(Company::class, 'company_id');
     }
 
     public function department()
     {
-    	return $this->belongsTo('App\Department', 'department_id');
+    	return $this->belongsTo(Department::class, 'department_id');
     }
 }
