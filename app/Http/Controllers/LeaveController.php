@@ -24,7 +24,7 @@ class LeaveController extends Controller
         if($request->limit){
             $limit = $request->limit;
         }else{
-            $limit = '5';
+            $limit = '10';
         }
 
         $category = CommonCategory::where('target', 'status')->first();

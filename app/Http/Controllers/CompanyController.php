@@ -18,10 +18,15 @@ class CompanyController extends Controller
         $this->middleware('auth');
     }
 
-    public function index()
+    public function index(Request $request)
     {
+        if($request->limit){
+            $limit = $request->limit;
+        }else{
+            $limit = '10';
+        }
 
-        $companies = Company::orderBy('id','asc')->Paginate(4);
+        $companies = Company::orderBy('id','asc')->Paginate($limit);
 
         return view('company.index')->with('companies',$companies);
     }

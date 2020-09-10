@@ -23,7 +23,7 @@ class LeaveTypeController extends Controller
         if($request->limit){
             $limit = $request->limit;
         }else{
-            $limit = '5';
+            $limit = '10';
         }
         
         $leaveTypes = LeaveType::with('company')->orderBy('id','asc')->Paginate($limit);

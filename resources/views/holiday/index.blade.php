@@ -37,6 +37,7 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="paginate d-flex justify-content-center">{{ $holidays->onEachSide(1)->appends(Request::except('page'))->links() }}</div>
 		</div>
 	</div>
 </div>

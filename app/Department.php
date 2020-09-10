@@ -10,8 +10,14 @@ class Department extends Model
     {
         return $this->hasMany(Role::class, 'department_id');
     }
+
     public function company()
     {
         return $this->belongsTo(Company::class, 'company_id');
+    }
+
+    public function employee()
+    {
+        return $this->hasMany(Employee::class, 'department_id');
     }
 }

@@ -35,5 +35,10 @@ class Company extends Model
     {
         return $this->hasMany(Department::class, 'company_id');
     }
+
+    public function employee()
+    {
+        return $this->hasMany(Employee::class, 'company_id');
+    }
     
 }

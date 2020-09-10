@@ -23,4 +23,9 @@ class Role extends Model
     {
     	return $this->belongsTo(Department::class, 'department_id');
     }
+
+    public function employee()
+    {
+    	return $this->hasMany(Employee::class, 'role_id');
+    }
 }

@@ -20,9 +20,16 @@ class EmployeeController extends Controller
         $this->middleware('auth');
     }
     
-    public function index()
+    public function index(Request $request)
     {
-        $employees = Employee::Paginate(4);
+        if($request->limit){
+            $limit = $request->limit;
+        }else{
+            $limit = '10';
+        }
+        
+        $employees = Employee::with('company', 'department', 'role')->orderBy('id','asc')->Paginate($limit);
+
         return view('employee.index', compact('employees'));
     }
     

@@ -24,7 +24,7 @@ class AttendanceController extends Controller
         if($request->limit){
             $limit = $request->limit;
         }else{
-            $limit = '5';
+            $limit = '10';
         }
 
         $attendances = Attendance::with('company', 'employee')->orderBy('id','asc')->Paginate($limit);

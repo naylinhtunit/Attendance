@@ -10,10 +10,11 @@
 				<table class="table table-striped table-hover">
 					<thead>
 						<tr>
+							<th>Image</th>
 							<th>Name</th>
-							<th>Company ID</th>
-							<th>Department ID</th>
-							<th>Role ID</th>
+							<th>Company</th>
+							<th>Department</th>
+							<th>Role</th>
 							<th>Email</th>
 							<th>Phone</th>
 							<th>Address</th>
@@ -24,11 +25,12 @@
 						@foreach($employees as $employee)
 						<tr>
 							<td>
-								<img src="{{ asset(''.$employee->image) }}" width="48" height="48" class="rounded-circle mr-2" alt=""> {{ $employee->name }}
+								<img src="{{ asset(''.$employee->image) }}" width="48" height="48" class="rounded-circle mr-2" alt="">
 							</td>
-							<td>{{ $employee->company_id }}</td>
-							<td>{{ $employee->department_id }}</td>
-							<td>{{ $employee->role_id }}</td>
+							<td>{{ $employee->name }}</td>
+							<td>{{ $employee->company->company_name }}</td>
+							<td>{{ $employee->department->department_name }}</td>
+							<td>{{ $employee->role->role_name }}</td>
 							<td>{{ $employee->email }}</td>
 							<td>{{ $employee->phone }}</td>
 							<td>{{ $employee->address }}</td>
@@ -45,6 +47,7 @@
 					</tbody>
 				</table>
 			</div>
+			<div class="paginate d-flex justify-content-center">{{ $employees->onEachSide(1)->appends(Request::except('page'))->links() }}</div>
 		</div>
 	</div>
 </div>
