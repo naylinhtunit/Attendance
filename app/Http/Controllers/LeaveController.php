@@ -6,6 +6,7 @@ use App\CommonCategory;
 use App\Company;
 use App\Leave;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LeaveController extends Controller
 {
@@ -56,7 +57,7 @@ class LeaveController extends Controller
         $leave->status = $request->status;
         $leave->save();
         
-        session()->flash('msg','Leave has been Created!');
+        alert()->success('success','Leave has been Created!');
         return redirect('/leave');
     }
     
@@ -77,7 +78,7 @@ class LeaveController extends Controller
         $leave->status = $request->status;
         $leave->save();
         
-        session()->flash('msg','Selected leave has been updated!');
+        alert()->success('success','Leave has been updated!');
         return redirect('/leave');
     }
 
@@ -86,7 +87,7 @@ class LeaveController extends Controller
         $leave = Leave::find($id);
         $leave->delete();
         
-        session()->flash('msg','Selected leave has been Deleted!');
+        alert()->success('success','Leave has been Deleted!');
         return redirect('/leave');
     }
 }

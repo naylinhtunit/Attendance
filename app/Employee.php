@@ -57,4 +57,8 @@ class Employee extends Authenticatable
     public function role(){
         return $this->belongsTo(Role::class, 'role_id');
     }
+
+    public function common(){
+        return $this->belongsTo(CommonCategory::class, 'gender');
+    }
 }

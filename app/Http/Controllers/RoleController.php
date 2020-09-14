@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Role;
 use App\Company;
 use App\Department;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class RoleController extends Controller
 {
@@ -26,7 +27,7 @@ class RoleController extends Controller
         }else{
             $limit = '10';
         }
-        
+
         $roles = Role::with('company', 'department')->orderBy('id','asc')->Paginate($limit);
 
         return view('role.index', compact('roles'));
@@ -53,7 +54,7 @@ class RoleController extends Controller
         $role->department_id      = $request->department_id;
         $role->save();
         
-        session()->flash('msg','Role has been Created!');
+        alert()->success('success','Role has been Created!');
         return redirect('/role');
     }
     
@@ -73,7 +74,7 @@ class RoleController extends Controller
         $role->department_id = $request->input('department_id');
         $role->save();
         
-        session()->flash('msg','Selected Role has been updated!');
+        alert()->success('success','Selected Role has been updated!');
         return redirect('/role');
     }
 
@@ -82,7 +83,7 @@ class RoleController extends Controller
         $role = Role::find($id);
         $role->delete();
         
-        session()->flash('msg','Selected Role has been Deleted!');
+        alert()->success('success','Selected Role has been Deleted!');
         return redirect('/role');
     }
 }

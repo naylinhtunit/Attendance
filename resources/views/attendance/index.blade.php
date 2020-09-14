@@ -28,7 +28,7 @@
 							<td>{{ $attendance->checkout_time }}</td>
 							<td class="table-action">
 								<form action="{{ url('/attendance', $attendance->id) }}" method="post">
-									<a href="{{ url('attendance/edit', $attendance->id) }}"><i class="align-middle" data-feather="edit-2"></i></a>
+									<a href="{{ url('attendance/edit', $attendance->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
 									@csrf
 									@method('DELETE')
 									<a href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>

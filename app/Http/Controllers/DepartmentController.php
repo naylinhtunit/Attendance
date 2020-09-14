@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Department;
 use App\Company;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class DepartmentController extends Controller
 {
@@ -49,7 +50,7 @@ class DepartmentController extends Controller
         $department->company_id      = $request->company_id;
         $department->save();
         
-        session()->flash('msg','Department has been Created!');
+        alert()->success('success','Department has been Created!');
         return redirect('/department');
     }
     
@@ -67,7 +68,7 @@ class DepartmentController extends Controller
         $department->company_id = $request->input('company_id');
         $department->save();
         
-        session()->flash('msg','Selected Department has been updated!');
+        alert()->success('success','Selected Department has been updated!');
         return redirect('/department');
     }
 
@@ -76,7 +77,7 @@ class DepartmentController extends Controller
         $department = Department::find($id);
         $department->delete();
         
-        session()->flash('msg','Selected Department has been Deleted!');
+        alert()->success('success','Selected Department has been Deleted!');
         return redirect('/department');
     }
 }

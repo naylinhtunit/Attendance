@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\PublicHolidays;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class PublicHolidaysController extends Controller
 {
@@ -53,7 +54,7 @@ class PublicHolidaysController extends Controller
         $holiday->company_id      = $request->company_id;
         $holiday->save();
         
-        session()->flash('msg','Public Holidays has been Created!');
+        alert()->success('success','Public Holidays has been Created!');
         return redirect('/holiday');
     }
     
@@ -73,7 +74,7 @@ class PublicHolidaysController extends Controller
         $holiday->company_id = $request->input('company_id');
         $holiday->save();
         
-        session()->flash('msg','Selected public holidays has been updated!');
+        alert()->success('success','Public Holidays has been updated!');
         return redirect('/holiday');
     }
 
@@ -82,7 +83,7 @@ class PublicHolidaysController extends Controller
         $holiday = PublicHolidays::find($id);
         $holiday->delete();
         
-        session()->flash('msg','Selected public holidays has been Deleted!');
+        alert()->success('success','Public Holidays has been Deleted!');
         return redirect('/holiday');
     }
 }

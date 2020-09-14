@@ -6,6 +6,7 @@ use App\Attendance;
 use App\Company;
 use App\Employee;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class AttendanceController extends Controller
 {
@@ -57,7 +58,7 @@ class AttendanceController extends Controller
         $attendance->checkout_time = $request->checkout_time;
         $attendance->save();
         
-        session()->flash('msg','Attendance has been Created!');
+        alert()->success('success','Attendance has been Created!');
         return redirect('/attendance');
     }
     
@@ -78,7 +79,7 @@ class AttendanceController extends Controller
         $attendance->checkout_time = $request->checkout_time;
         $attendance->save();
         
-        session()->flash('msg','Selected attendance has been updated!');
+        alert()->success('success','Selected attendance has been updated!');
         return redirect('/attendance');
     }
 
@@ -87,7 +88,7 @@ class AttendanceController extends Controller
         $attendance = Attendance::find($id);
         $attendance->delete();
         
-        session()->flash('msg','Selected attendance has been Deleted!');
+        alert()->success('success','Selected attendance has been Deleted!');
         return redirect('/attendance');
     }
 }

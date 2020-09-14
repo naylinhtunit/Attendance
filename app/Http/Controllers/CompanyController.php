@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use Carbon\Carbon;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class CompanyController extends Controller
 {
@@ -31,7 +32,7 @@ class CompanyController extends Controller
                             ->orwhere('phone', 'like', '%'.$keyword.'%')
                             ->orderBy('id','asc')->Paginate($limit);
 
-        return view('company.index')->with('companies',$companies);
+        return view('company.index', compact('companies'));
     }
 
     public function create()
@@ -74,14 +75,14 @@ class CompanyController extends Controller
 
         $company->save();
         
-        session()->flash('msg','Company has been Created!');
+        alert()->success('success','Company has been Created!');
         return redirect('/company');
     }
 
     public function edit($id)
     { 
         $company = Company::find($id);
-        return view('company.edit')->with('company',$company);
+        return view('company.edit', compact('company'));
     }
 
     public function update(Request $request, $id)
@@ -107,7 +108,7 @@ class CompanyController extends Controller
         
         $company->save();
         
-        session()->flash('msg','Selected Company has been updated!');
+        alert()->success('success','Selected company has been updated!');
         return redirect('/company');
     }
 
@@ -116,7 +117,7 @@ class CompanyController extends Controller
         $company = Company::find($id);
         $company->delete();
         
-        session()->flash('msg','Selected Company has been Deleted!');
+        alert()->success('success','Selected company has been Deleted!');
         return redirect('/company');
     }
 }

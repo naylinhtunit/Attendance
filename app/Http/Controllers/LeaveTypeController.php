@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Company;
 use App\LeaveType;
 use Illuminate\Http\Request;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class LeaveTypeController extends Controller
 {
@@ -51,7 +52,7 @@ class LeaveTypeController extends Controller
         $leaveType->total_leave = $request->total_leave;
         $leaveType->save();
         
-        session()->flash('msg','Leave Type has been Created!');
+        alert()->success('success','Leave Type has been Created!');
         return redirect('/leave_type');
     }
     
@@ -70,7 +71,7 @@ class LeaveTypeController extends Controller
         $leaveType->total_leave = $request->input('total_leave');
         $leaveType->save();
         
-        session()->flash('msg','Selected leave type has been updated!');
+        alert()->success('success','Leave Type has been updated!');
         return redirect('/leave_type');
     }
 
@@ -79,7 +80,7 @@ class LeaveTypeController extends Controller
         $leaveType = LeaveType::find($id);
         $leaveType->delete();
         
-        session()->flash('msg','Selected leave type has been Deleted!');
+        alert()->success('success','Leave Type has been Deleted!');
         return redirect('/leave_type');
     }
 }

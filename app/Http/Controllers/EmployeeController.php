@@ -10,6 +10,7 @@ use App\CommonCategory;
 use App\Role;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class EmployeeController extends Controller
 {
@@ -28,7 +29,7 @@ class EmployeeController extends Controller
             $limit = '10';
         }
         
-        $employees = Employee::with('company', 'department', 'role')->orderBy('id','asc')->Paginate($limit);
+        $employees = Employee::with('company', 'department', 'role', 'common')->orderBy('id','asc')->Paginate($limit);
 
         return view('employee.index', compact('employees'));
     }
@@ -48,7 +49,9 @@ class EmployeeController extends Controller
         $this->validateRequest($request,NULL);
         $fileNameToStore = $this->handleImageUpload($request);
         $this->setEmployee($request ,$employee, $fileNameToStore);
-        return redirect('/employee')->with('info','New Employee has been created!');
+        
+        alert()->success('success','New Employee has been Created!');
+        return redirect('/employee');
     }
     
     public function edit($id)
@@ -73,7 +76,9 @@ class EmployeeController extends Controller
         }
         
         $this->setEmployee($request, $employee ,$fileNameToStore);
-        return redirect('/employee')->with('info','selected Employee has been updated');
+        
+        alert()->success('success','selected Employee has been updated!');
+        return redirect('/employee');
     }
     
     public function destroy($id)
@@ -84,7 +89,7 @@ class EmployeeController extends Controller
         Storage::deleteDirectory('public/img/employee/'.$employee->image);
         $employee->delete();
         
-        session()->flash('msg','Selected employee has been Deleted!');
+        alert()->success('success','Selected employee has been Deleted!');
         return redirect('/employee');
     }
 

@@ -16,7 +16,7 @@
 									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-building-o" style="font-size: 30px;" aria-hidden="true"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
-										<span class="text-danger"> ({{$company}}) </span>
+										<span class="text-white badge badge-success"> {{$company}} </span>
 									</div>
 								</div>
 							</div>
@@ -26,7 +26,7 @@
 									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-building-o" style="font-size: 30px;" aria-hidden="true"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
-										<span class="text-danger"> ({{$department}}) </span>
+										<span class="text-white badge badge-success"> {{$department}} </span>
 									</div>
 								</div>
 							</div>
@@ -38,7 +38,7 @@
 									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-user" style="font-size: 30px;" aria-hidden="true"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
-										<span class="text-danger"> ({{$role}}) </span>
+										<span class="text-white badge badge-success"> {{$role}} </span>
 									</div>
 								</div>
 							</div>
@@ -48,7 +48,7 @@
 									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-users" style="font-size: 30px;" aria-hidden="true"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
-										<span class="text-danger"> ({{$employee}}) </span>
+										<span class="text-white badge badge-success"> {{$employee}} </span>
 									</div>
 								</div>
 							</div>
@@ -67,7 +67,7 @@
 									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-gift" style="font-size: 30px;" aria-hidden="true"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
-										<span class="text-danger"> ({{$holiday}}) </span>
+										<span class="text-white badge badge-success"> {{$holiday}} </span>
 									</div>
 								</div>
 							</div>
@@ -77,7 +77,7 @@
 									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-pagelines" style="font-size: 30px;" aria-hidden="true"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
-										<span class="text-danger"> ({{$leaveType}}) </span>
+										<span class="text-white badge badge-success"> {{$leaveType}} </span>
 									</div>
 								</div>
 							</div>
@@ -89,7 +89,7 @@
 									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-sign-out" style="font-size: 30px;" aria-hidden="true"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
-										<span class="text-danger"> ({{$leave}}) </span>
+										<span class="text-white badge badge-success"> {{$leave}} </span>
 									</div>
 								</div>
 							</div>
@@ -99,7 +99,7 @@
 									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-clock-o" style="font-size: 30px;" aria-hidden="true"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
-										<span class="text-danger"> ({{$attendance}}) </span>
+										<span class="text-white badge badge-success"> {{$attendance}} </span>
 									</div>
 								</div>
 							</div>

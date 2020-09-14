@@ -19,7 +19,6 @@
     <link href="{{ asset('dist/css/dropify.min.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
-    {{-- <script src="{{ asset('js/app.js') }}" defer></script> --}}
     <script src="{{ asset('js/kit.js') }}" defer></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="{{ asset('dist/js/dropify.min.js') }}" defer></script>
@@ -42,6 +41,7 @@
                         <ul class="navbar-nav ml-auto">
                             @if (Auth::check())
                             <li class="nav-item dropdown">
+
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}
                                 </a>
@@ -65,16 +65,24 @@
                 </nav>
 
                 <main class="content">
-
-                    {{-- print msg message --}}
-                    @if(Session::has('msg'))
-                        <div class="alert alert-success alert-dismissible fade show p-3">
-                            {{ Session::get('msg') }}
-                            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
+                    
+                    @include('sweetalert::alert')
+                    
+                    {{-- print error msg message --}}
+                    <div class="container-fluid p-0">
+                        <div class="row justify-content-center">
+                            <div class="col-xl-7 col-xxl-6">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger alert-dismissible fade show p-3" role="alert">
+                                        Please fix the following errors
+                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                @endif
+                            </div>
                         </div>
-                    @endif
+                    </div>
                     
                     @yield('content')
 
