@@ -28,7 +28,9 @@
                                     <div class="form-group row">
                                         <div class=" input-group">
                                             <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password" placeholder="Password">
-                                            <button style="right: 0%; z-index: 999;" class="btn btn-default input-group-btn position-absolute" type="button"><span toggle="#password" class="fa fa-fw fa-eye toggle-password"></span></button>
+                                            <button style="right: 0%; z-index: 999; padding: 0px;" title="Show password" class="btn btn-default input-group-btn position-absolute" type="button">
+                                                <span style="padding: 8px 26px 8px 16px;" toggle="#password" class="fa fa-fw fa-eye toggle-password"></span>
+                                            </button>
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>

@@ -19,7 +19,9 @@
     <link href="{{ asset('dist/css/dropify.min.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
+    @if (Auth::check())
     <script src="{{ asset('js/kit.js') }}" defer></script>
+    @endif
     <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="{{ asset('dist/js/dropify.min.js') }}" defer></script>
 </head>
@@ -27,10 +29,14 @@
     <div id="app">
         <div class="wrapper">
           
-          <!-- Sidebar -->
-          @include('layouts.sidebar')
+            <!-- Sidebar -->
+            @if (Auth::check())
+                @include('layouts.sidebar')
+            @endif
 
             <div class="main">
+                
+                @if (Auth::check())
                 <nav class="navbar navbar-expand navbar-light navbar-bg">
                     <a class="sidebar-toggle d-flex">
                         <i class="hamburger align-self-center"></i>
@@ -63,7 +69,7 @@
 
                     </div>
                 </nav>
-
+                @endif
                 <main class="content">
                     
                     @include('sweetalert::alert')
