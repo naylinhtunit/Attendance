@@ -148,7 +148,7 @@ class EmployeeController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() .'.'. $extension;
-            $fileNameToStore = $file->move('img\employee', $filename);
+            $fileNameToStore = $file->move('img/employee/' . $filename);
         }
         return $fileNameToStore;
     }
