@@ -25,7 +25,7 @@
 						@foreach($employees as $employee)
 						<tr>
 							<td>
-								<img src="{{ asset(''.$employee->image) }}" width="48" height="48" class="rounded-circle mr-2" alt="">
+								<img src="{{ asset('/img/employee/'.$employee->image) }}" width="48" height="48" class="rounded-circle mr-2" alt="">
 							</td>
 							<td>{{ $employee->name }}</td>
 							<td>{{ $employee->company->company_name }}</td>
@@ -36,10 +36,10 @@
 							<td>{{ $employee->address }}</td>
 							<td class="table-action">
 								<form action="{{ route('employee.destroy', $employee->id) }}" method="post">
-									<a href="{{ route('employee.edit', $employee->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
+									<a class="text-warning" href="{{ route('employee.edit', $employee->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
 									@csrf
 									@method('DELETE')
-									<a href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>
+									<a class="text-danger" href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>
 								</form>
 							</td>
 						</tr>

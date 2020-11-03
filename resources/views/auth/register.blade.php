@@ -15,8 +15,13 @@
                                 <form method="POST" action="{{ route('register') }}">
                                     @csrf
 
-                                    <div class="form-group row">
-                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" placeholder="Name" autofocus>
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-user fa-fw"></i>
+                                            </span>
+                                        </div>
+                                        <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" autocomplete="name" placeholder="Name" autofocus>
 
                                         @error('name')
                                         <span class="invalid-feedback" role="alert">
@@ -25,8 +30,13 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group row">
-                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" required autocomplete="email">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-envelope fa-fw"></i>
+                                            </span>
+                                        </div>
+                                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="E-Mail Address" autocomplete="email">
 
                                         @error('email')
                                         <span class="invalid-feedback" role="alert">
@@ -35,8 +45,13 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group row">
-                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" required autocomplete="new-password">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-lock fa-fw"></i>
+                                            </span>
+                                        </div>
+                                        <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" placeholder="Password" autocomplete="new-password">
 
                                         @error('password')
                                         <span class="invalid-feedback" role="alert">
@@ -45,16 +60,18 @@
                                         @enderror
                                     </div>
 
-                                    <div class="form-group row">
-                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" required autocomplete="new-password">
+                                    <div class="input-group mb-3">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">
+                                                <i class="fa fa-lock fa-fw"></i>
+                                            </span>
+                                        </div>
+                                        <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Confirm Password" autocomplete="new-password">
                                     </div>
-
-                                    <div class="form-group row">
-                                        <button type="submit" class="btn btn-primary">
-                                            {{ __('Register') }}
-                                        </button>
-                                        <a class="btn btn-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                                    </div>
+                                    
+                                    <button type="submit" class="btn btn-block btn-primary">
+                                        {{ __('Register') }}
+                                    </button>
                                 </form>
                             </div>
                         </div>

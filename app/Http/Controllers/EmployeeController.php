@@ -47,8 +47,8 @@ class EmployeeController extends Controller
     {
         $employee = new Employee();
         $this->validateRequest($request,NULL);
-        $fileNameToStore = $this->handleImageUpload($request);
-        $this->setEmployee($request ,$employee, $fileNameToStore);
+        $filename = $this->handleImageUpload($request);
+        $this->setEmployee($request ,$employee, $filename);
         
         alert()->success('success','New Employee has been Created!');
         return redirect('/employee');
@@ -69,13 +69,13 @@ class EmployeeController extends Controller
         $employee = Employee::find($id);
         if($request->hasFile('image')){
 
-            $fileNameToStore = $this->handleImageUpload($request);
+            $filename = $this->handleImageUpload($request);
             Storage::deleteDirectory('public/img/employee/'.$employee->image);
         }else{
-            $fileNameToStore = '';
+            $filename = '';
         }
         
-        $this->setEmployee($request, $employee ,$fileNameToStore);
+        $this->setEmployee($request, $employee ,$filename);
         
         alert()->success('success','selected Employee has been updated!');
         return redirect('/employee');
@@ -118,7 +118,7 @@ class EmployeeController extends Controller
     /**
      * Add or update an employee
      */
-    private function setEmployee(Request $request , Employee $employee , $fileNameToStore){
+    private function setEmployee(Request $request , Employee $employee , $filename){
         $employee->name = $request->input('name');
         $employee->email = $request->input('email');
         $employee->company_id = $request->input('company_id');
@@ -134,7 +134,7 @@ class EmployeeController extends Controller
             $employee->password = bcrypt($request->input('password'));
         }
         if($request->hasFile('image')){
-            $employee->image = $fileNameToStore;
+            $employee->image = $filename;
         }
         $employee->save();
     }
@@ -148,8 +148,8 @@ class EmployeeController extends Controller
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() .'.'. $extension;
-            $fileNameToStore = $file->move('img/employee/' . $filename);
+            $fileNameToStore = $file->move('img/employee', $filename);
         }
-        return $fileNameToStore;
+        return $filename;
     }
 }

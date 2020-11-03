@@ -84,7 +84,7 @@
 						<span class="{{$errors->has('salary') ? 'helper-text red-text' : ''}}">{{$errors->first('salary')}}</span>
 					</div>
 					<div class="form-group">
-						<input name="image" type="file" id="input-file-now" value="{{ asset(''.$employee->image) }}" data-default-file="{{ asset(''.$employee->image) }}" data-allowed-file-extensions="png jpg jpeg svg" class="dropify" />   
+						<input name="image" type="file" id="input-file-now" value="{{ asset('/img/employee/'.$employee->image) }}" data-default-file="{{ asset('/img/employee/'.$employee->image) }}" data-allowed-file-extensions="png jpg jpeg svg" class="dropify" />   
 						<span class="{{$errors->has('image') ? 'helper-text red-text' : ''}}">{{$errors->has('image') ? $errors->first('image') : ''}}</span>
 					</div>
 					<button type="submit" class="btn btn-primary">Save</button>
