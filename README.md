@@ -1,4 +1,5 @@
 ## Attendance Web Application
+import hr.sql in database
 ## nlt
 ## License
 
