@@ -28,4 +28,18 @@ class Role extends Model
     {
     	return $this->hasMany(Employee::class, 'role_id');
     }
+
+    public function attendance()
+    {
+        return $this->hasMany(Attendance::class, 'role_id');
+    }
+    
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($del) {
+             $del->employee()->delete();
+             $del->attendance()->delete();
+        });
+    }
 }

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Company;
 use Carbon\Carbon;
+use File;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class CompanyController extends Controller
@@ -45,7 +46,7 @@ class CompanyController extends Controller
         $request->validate([
             'company_name' => 'required',
             'address' => 'required',
-            'phone' => 'required',
+            'phone' => 'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
             'latitude' => 'required',
             'longitude' => 'required',
             'start_office_hours' => 'required',
@@ -99,6 +100,10 @@ class CompanyController extends Controller
         $company->end_pay_date = $request->input('end_pay_date');
 
         if ($request->hasFile('image')) {
+            $image_path = public_path().'/img/company/'.$company->avatar;
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
             $file = $request->file('image');
             $extension = $file->getClientOriginalExtension();
             $filename = time() .'.'. $extension;
@@ -115,6 +120,10 @@ class CompanyController extends Controller
     public function destroy($id)
     {
         $company = Company::find($id);
+        $image_path = public_path().'/img/company/'.$company->avatar;
+        if(File::exists($image_path)) {
+            File::delete($image_path);
+        }
         $company->delete();
         
         alert()->success('success','Selected company has been Deleted!');

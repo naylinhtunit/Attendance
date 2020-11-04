@@ -64,7 +64,7 @@
 					</div>
 					<div class="form-group">
 						<label for="phone">Phone</label>
-						<input type="text" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="09123456789" value="{{Request::old('phone') ? : ''}}" />
+						<input type="number" name="phone" class="form-control @error('phone') is-invalid @enderror" id="phone" placeholder="09123456789" value="{{Request::old('phone') ? : ''}}" />
 						<span class="{{$errors->has('phone') ? 'text-danger' : ''}}">{{$errors->first('phone')}}</span>
 					</div>
 					<div class="form-group">

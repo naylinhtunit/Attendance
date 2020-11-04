@@ -17,7 +17,7 @@ class CreateCompaniesTable extends Migration
             $table->id();
             $table->string('company_name', 100);
             $table->string('address', 200)->nullable();
-            $table->integer('phone');
+            $table->string('phone');
             $table->double('latitude', 10, 7)->nullable();
             $table->double('longitude', 10, 7)->nullable();
             $table->time('start_office_hours');

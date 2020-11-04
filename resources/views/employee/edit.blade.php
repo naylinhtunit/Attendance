@@ -60,7 +60,7 @@
 					</div>
 					<div class="form-group">
 						<label for="phone">Phone</label>
-						<input type="text" name="phone" class="form-control" id="phone" value="{{ $employee->phone }}">
+						<input type="number" name="phone" class="form-control" id="phone" value="{{ $employee->phone }}">
 						<span class="{{$errors->has('phone') ? 'helper-text red-text' : ''}}">{{$errors->first('phone')}}</span>
 					</div>
 					<div class="form-group">

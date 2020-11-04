@@ -38,10 +38,10 @@
 							<td>{{ $company->end_pay_date }}</td>
 							<td class="table-action">
 								<form action="{{ url('/company', $company->id) }}" method="post">
-									<a href="{{ url('company/edit', $company->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
+									<a class="text-warning" href="{{ url('company/edit', $company->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
 									@csrf
 									@method('DELETE')
-									<a href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>
+									<a class="text-danger" href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>
 								</form>
 							</td>
 						</tr>

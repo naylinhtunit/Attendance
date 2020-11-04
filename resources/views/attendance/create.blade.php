@@ -26,6 +26,14 @@
 							@endforeach
 						</select>
 					</div>
+					<div class="form-group">
+						<label>Role ID</label>
+						<select name="role_id" class="form-control">
+							@foreach($roles as $role)
+								<option value="{{ $role->id }}">{{ $role->id }}</option>
+							@endforeach
+						</select>
+					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">
 							<label>CheckIn Time</label>

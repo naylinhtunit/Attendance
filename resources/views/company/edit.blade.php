@@ -21,7 +21,7 @@
 					</div>
 					<div class="form-group">
 						<label for="phone">Phone</label>
-					<input type="text" name="phone" class="form-control" id="phone" value="{{ $company->phone }}">
+						<input type="number" name="phone" class="form-control" id="phone" value="{{ $company->phone }}">
 					</div>
 					<div class="form-row">
 						<div class="form-group col-md-6">

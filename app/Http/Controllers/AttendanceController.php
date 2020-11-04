@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Attendance;
 use App\Company;
 use App\Employee;
+use App\Role;
 use Illuminate\Http\Request;
 use RealRashid\SweetAlert\Facades\Alert;
 
@@ -39,7 +40,8 @@ class AttendanceController extends Controller
     {
         $companies = Company::all();
         $employees = Employee::all();
-        return view('attendance.create', compact('companies', 'employees'));
+        $roles = Role::all();
+        return view('attendance.create', compact('companies', 'employees', 'roles'));
     }
 
     public function store(Request $request)
@@ -47,6 +49,7 @@ class AttendanceController extends Controller
         $request->validate([
             'company_id' => 'required',
             'employee_id' => 'required',
+            'role_id' => 'required',
             'checkin_time' => 'required',
             'checkout_time' => 'required',
         ]);
@@ -54,6 +57,7 @@ class AttendanceController extends Controller
         $attendance = new Attendance();
         $attendance->company_id      = $request->company_id;
         $attendance->employee_id = $request->employee_id;
+        $attendance->role_id = $request->role_id;
         $attendance->checkin_time = $request->checkin_time;
         $attendance->checkout_time = $request->checkout_time;
         $attendance->save();
@@ -66,8 +70,9 @@ class AttendanceController extends Controller
     {
         $companies = Company::all();
         $employees = Employee::all();
+        $roles = Role::all();
         $attendance = Attendance::find($id);
-        return view('attendance.edit', compact('attendance', 'companies', 'employees'));
+        return view('attendance.edit', compact('attendance', 'companies', 'employees', 'roles'));
     }
 
     public function update(Request $request, $id)
@@ -75,6 +80,7 @@ class AttendanceController extends Controller
         $attendance = Attendance::Find($id);
         $attendance->company_id      = $request->company_id;
         $attendance->employee_id = $request->employee_id;
+        $attendance->role_id = $request->role_id;
         $attendance->checkin_time = $request->checkin_time;
         $attendance->checkout_time = $request->checkout_time;
         $attendance->save();

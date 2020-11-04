@@ -20,4 +20,9 @@ class Attendance extends Model
     {
         return $this->belongsTo(Employee::class, 'employee_id');
     }
+    
+    public function role()
+    {
+        return $this->belongsTo(Role::class, 'role_id');
+    }
 }

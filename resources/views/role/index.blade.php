@@ -24,10 +24,10 @@
 							<td>{{ $role->department_id }}: {{ $role->department->department_name }}</td>
 							<td class="table-action">
 								<form action="{{ url('/role', $role->id) }}" method="post">
-									<a href="{{ url('role/edit', $role->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
+									<a class="text-warning" href="{{ url('role/edit', $role->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
 									@csrf
 									@method('DELETE')
-									<a href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>
+									<a class="text-danger" href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>
 								</form>
 							</td>
 						</tr>

@@ -19,7 +19,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('department_id');
             $table->integer('role_id');
             $table->string('name', 100);
-            $table->integer('phone');
+            $table->string('phone');
             $table->string('address', 200)->nullable();
             $table->string('email')->unique();
             $table->date('join_date');

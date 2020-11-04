@@ -61,4 +61,12 @@ class Employee extends Authenticatable
     public function common(){
         return $this->belongsTo(CommonCategory::class, 'gender');
     }
+    
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($del) {
+             $del->attendance()->delete();
+        });
+    }
 }

@@ -1,7 +1,7 @@
 <nav id="sidebar" class="sidebar">
     <div class="sidebar-content js-simplebar">
         <a class="sidebar-brand" href="index.html">
-            <span class="align-middle">{{ config('app.name', 'Attendance') }}</span>
+            <span class="align-middle">Attendance</span>
         </a>
 
         <ul class="sidebar-nav">

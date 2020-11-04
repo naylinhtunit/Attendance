@@ -8,15 +8,13 @@ use App\Department;
 use App\Employee;
 use App\CommonCategory;
 use App\Role;
+use File;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class EmployeeController extends Controller
 {
-    /**
-     *  Only authenticated users can access this controller
-     */
     public function __construct(){
         $this->middleware('auth');
     }
@@ -68,9 +66,12 @@ class EmployeeController extends Controller
     {
         $employee = Employee::find($id);
         if($request->hasFile('image')){
-
+            $image_path = public_path().'/img/employee/'.$employee->image;
+            if(File::exists($image_path)) {
+                File::delete($image_path);
+            }
             $filename = $this->handleImageUpload($request);
-            Storage::deleteDirectory('public/img/employee/'.$employee->image);
+            // Storage::deleteDirectory('public/img/employee/'.$employee->image);
         }else{
             $filename = '';
         }
@@ -84,25 +85,23 @@ class EmployeeController extends Controller
     public function destroy($id)
     {   
         $employee = Employee::find($id);
-
-        //delete the employee image
-        Storage::deleteDirectory('public/img/employee/'.$employee->image);
+        $image_path = public_path().'/img/employee/'.$employee->image;
+        if(File::exists($image_path)) {
+            File::delete($image_path);
+        }
         $employee->delete();
         
         alert()->success('success','Selected employee has been Deleted!');
         return redirect('/employee');
     }
-
-    /**
-     *  Validate all the inputs
-     */
+    
     private function validateRequest(Request $request, $id)
     {
         $this->validate($request,[
             'company_id'   =>  'required',
             'department_id'    =>  'required',
             'role_id'    =>  'required',
-            'phone'    =>  'required',
+            'phone'    =>  'required|regex:/^([0-9\s\-\+\(\)]*)$/|min:8',
             'address'    =>  'required',
             'join_date'    =>  'required',
             'resign_date'    =>  'required',
@@ -114,10 +113,7 @@ class EmployeeController extends Controller
             'image'      =>  ''.($request->hasFile('image')  ? 'required|image|max:1999' : '')
         ]);
     }
-
-    /**
-     * Add or update an employee
-     */
+    
     private function setEmployee(Request $request , Employee $employee , $filename){
         $employee->name = $request->input('name');
         $employee->email = $request->input('email');
@@ -138,10 +134,7 @@ class EmployeeController extends Controller
         }
         $employee->save();
     }
-
-    /**
-     *  Handle Image Upload
-     */
+    
     public function handleImageUpload(Request $request){
         
         if ($request->hasFile('image')) {

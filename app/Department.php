@@ -20,4 +20,13 @@ class Department extends Model
     {
         return $this->hasMany(Employee::class, 'department_id');
     }
+    
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($del) {
+             $del->role()->delete();
+             $del->employee()->delete();
+        });
+    }
 }

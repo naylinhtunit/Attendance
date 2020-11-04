@@ -41,4 +41,17 @@ class Company extends Model
         return $this->hasMany(Employee::class, 'company_id');
     }
     
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($del) {
+             $del->attendance()->delete();
+             $del->leave()->delete();
+             $del->leaveType()->delete();
+             $del->holiday()->delete();
+             $del->role()->delete();
+             $del->department()->delete();
+             $del->employee()->delete();
+        });
+    }
 }

@@ -3,7 +3,7 @@
         <div class="row text-muted">
             <div class="col-6 text-left">
                 <p class="mb-0 text-muted">
-                    <strong>{{ config('app.name', 'Attendance') }}</strong> &copy;
+                    <strong>&copy; <span class="badge badge-danger">HR</span> 2020</strong>
                 </p>
             </div>
             <div class="col-6 text-right">
