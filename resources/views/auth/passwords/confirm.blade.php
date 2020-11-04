@@ -9,10 +9,10 @@
 					<div class="tab-pane fade show active" id="account" role="tabpanel">
 						<div class="card p-3">
 							<div class="card-header">
-								<h5 class="card-title mb-0">{{ __('Reset Password') }}</h5>
+								<h1 class="mb-3">{{ __('Reset Password') }}</h1>
+								<h5 class="card-title mb-0">{{ __('Please confirm your password before continuing.') }}</h5>
 							</div>
 							<div class="card-body">
-								{{ __('Please confirm your password before continuing.') }}
 
 								<form method="POST" action="{{ route('password.confirm') }}">
 									@csrf
@@ -33,17 +33,15 @@
 									</div>
 
 									<div class="input-group mb-3">
-										<div class="col-md-8 offset-md-4">
-											<button type="submit" class="btn btn-primary">
-												{{ __('Confirm Password') }}
-											</button>
+										<button type="submit" class="btn btn-block btn-primary">
+											{{ __('Confirm Password') }}
+										</button>
 
-											@if (Route::has('password.request'))
-											<a class="btn btn-link" href="{{ route('password.request') }}">
-												{{ __('Forgot Your Password?') }}
-											</a>
-											@endif
-										</div>
+										@if (Route::has('password.request'))
+										<a class="btn btn-link" href="{{ route('password.request') }}">
+											{{ __('Forgot Your Password?') }}
+										</a>
+										@endif
 									</div>
 								</form>
 							</div>
