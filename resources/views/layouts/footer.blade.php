@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="row text-muted">
             <p class="m-auto">
-                <strong>yathar <span class="badge badge-danger">HR</span></strong>
+                <strong>Attendance &copy; 2020</strong>
             </p>
         </div>
     </div>
