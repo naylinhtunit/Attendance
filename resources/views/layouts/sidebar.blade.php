@@ -10,13 +10,35 @@
                 <a class="sidebar-link" href="{{ url('/') }}">
                     <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Dashboard</span>
                 </a>
-            </li>
+            </li> 
 
-            <li class="sidebar-item">
-                <a href="#system" data-toggle="collapse" class="sidebar-link collapsed">
+            <li 
+                @if(
+                    Request::is('company', 'department', 'role', 'holiday', 'leave_type', 'leave', 'attendance')
+                    ) 
+                    class="sidebar-item active" 
+                @endif
+            >
+                <a data-target="#systems" data-toggle="collapse"
+                    @if(
+                        Request::is('company', 'department', 'role', 'holiday', 'leave_type', 'leave', 'attendance')
+                        ) 
+                        class="sidebar-link" 
+                    @else
+                    class="sidebar-link collapsed"
+                    @endif
+                >
                     <i class="align-middle" data-feather="settings"></i> <span class="align-middle">System Management</span>
                 </a>
-                <ul id="system" class="sidebar-dropdown list-unstyled collapse " data-parent="#sidebar">
+                <ul id="systems"
+                    @if(
+                        Request::is('company', 'department', 'role', 'holiday', 'leave_type', 'leave', 'attendance')
+                        ) 
+                        class="sidebar-dropdown list-unstyled collapse show" 
+                    @else
+                    class="sidebar-dropdown list-unstyled collapse"
+                    @endif
+                    data-parent="#sidebar">
                     <li @if(Request::is('company')) class="sidebar-item active" @endif>
                         <a class="sidebar-link" href="{{ url('/company') }}">
                             <span class="align-middle">Company</span>
