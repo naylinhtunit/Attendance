@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 04, 2020 at 11:22 AM
+-- Generation Time: Nov 11, 2020 at 12:30 PM
 -- Server version: 10.4.14-MariaDB
 -- PHP Version: 7.4.9
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `hr`
+-- Database: `attendance`
 --
 
 -- --------------------------------------------------------
@@ -37,28 +37,6 @@ CREATE TABLE `attendances` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `common_categories`
---
-
-CREATE TABLE `common_categories` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `target` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `category` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `common_categories`
---
-
-INSERT INTO `common_categories` (`id`, `target`, `category`) VALUES
-(1, 'gender', 'Male'),
-(2, 'gender', 'Female'),
-(3, 'status', 'Approve'),
-(4, 'status', 'Pending');
 
 -- --------------------------------------------------------
 
@@ -196,8 +174,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (8, '2020_09_01_081054_create_public_holidays_table', 1),
 (9, '2020_09_01_081114_create_leave_types_table', 1),
 (10, '2020_09_01_081127_create_leaves_table', 1),
-(11, '2020_09_01_081234_create_attendances_table', 1),
-(12, '2020_09_07_061322_create_common_categories_table', 1);
+(11, '2020_09_01_081234_create_attendances_table', 1);
 
 -- --------------------------------------------------------
 
@@ -260,6 +237,13 @@ CREATE TABLE `users` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'admin', 'admin@gmail.com', NULL, '$2y$10$uEEInBJRt/4YbNzVqB4sSOYY8jVpfh1SZx84yu2sfGtrYTXSAMm7G', NULL, '2020-11-11 04:53:43', '2020-11-11 04:53:43');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -267,12 +251,6 @@ CREATE TABLE `users` (
 -- Indexes for table `attendances`
 --
 ALTER TABLE `attendances`
-  ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `common_categories`
---
-ALTER TABLE `common_categories`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -354,12 +332,6 @@ ALTER TABLE `attendances`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `common_categories`
---
-ALTER TABLE `common_categories`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
 -- AUTO_INCREMENT for table `companies`
 --
 ALTER TABLE `companies`
@@ -399,7 +371,7 @@ ALTER TABLE `leave_types`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `public_holidays`
@@ -417,7 +389,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
