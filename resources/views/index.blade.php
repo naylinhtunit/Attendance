@@ -13,7 +13,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 									<h5 class="card-title mb-4">Company</h5>
-									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-building-o" style="font-size: 30px;" aria-hidden="true"></i></h1>
+									<h1 class="display-5 mt-1 mb-3"><i class="align-middle mr-2" data-feather="home"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
 										<span class="text-white badge badge-success"> {{$company}} </span>
@@ -23,7 +23,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 									<h5 class="card-title mb-4">Department</h5>
-									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-building-o" style="font-size: 30px;" aria-hidden="true"></i></h1>
+									<h1 class="display-5 mt-1 mb-3"><i class="align-middle mr-2" data-feather="layout"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
 										<span class="text-white badge badge-success"> {{$department}} </span>
@@ -35,7 +35,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 									<h5 class="card-title mb-4">Role</h5>
-									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-user" style="font-size: 30px;" aria-hidden="true"></i></h1>
+									<h1 class="display-5 mt-1 mb-3"><i class="align-middle mr-2" data-feather="user"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
 										<span class="text-white badge badge-success"> {{$role}} </span>
@@ -45,7 +45,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 									<h5 class="card-title mb-4">Employee</h5>
-									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-users" style="font-size: 30px;" aria-hidden="true"></i></h1>
+									<h1 class="display-5 mt-1 mb-3"><i class="align-middle" data-feather="users"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
 										<span class="text-white badge badge-success"> {{$employee}} </span>
@@ -64,7 +64,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 									<h5 class="card-title mb-4">Public Holidays</h5>
-									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-gift" style="font-size: 30px;" aria-hidden="true"></i></h1>
+									<h1 class="display-5 mt-1 mb-3"><i class="align-middle mr-2" data-feather="calendar"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
 										<span class="text-white badge badge-success"> {{$holiday}} </span>
@@ -74,7 +74,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 									<h5 class="card-title mb-4">Leave Type</h5>
-									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-pagelines" style="font-size: 30px;" aria-hidden="true"></i></h1>
+									<h1 class="display-5 mt-1 mb-3"><i class="align-middle" data-feather="briefcase"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
 										<span class="text-white badge badge-success"> {{$leaveType}} </span>
@@ -86,7 +86,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 									<h5 class="card-title mb-4">Leave</h5>
-									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-sign-out" style="font-size: 30px;" aria-hidden="true"></i></h1>
+									<h1 class="display-5 mt-1 mb-3"><i class="align-middle mr-2" data-feather="log-out"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
 										<span class="text-white badge badge-success"> {{$leave}} </span>
@@ -96,7 +96,7 @@
 							<div class="card">
 								<div class="card-body text-center">
 									<h5 class="card-title mb-4">Attendance</h5>
-									<h1 class="display-5 mt-1 mb-3"><i class="fa fa-clock-o" style="font-size: 30px;" aria-hidden="true"></i></h1>
+									<h1 class="display-5 mt-1 mb-3"><i class="align-middle mr-2" data-feather="clock"></i></h1>
 									<div class="mb-1">
 										<span class="text-muted"> Total </span>
 										<span class="text-white badge badge-success"> {{$attendance}} </span>

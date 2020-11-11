@@ -56,8 +56,8 @@
 					<div class="form-group">
 						<label>Gender</label>
 						<select name="gender" class="form-control @error('gender') is-invalid @enderror">
-							@foreach($categories as $category)
-								<option value="{{ $category->id }}">{{ $category->id }}: {{ $category->category }}</option>
+							@foreach(config('const.gender') as $key => $gender)
+								<option value="{{ $key }}">{{ $gender }}</option>
 							@endforeach
 						</select>
 						<span class="{{$errors->has('gender') ? 'text-danger' : ''}}">{{$errors->first('gender')}}</span>

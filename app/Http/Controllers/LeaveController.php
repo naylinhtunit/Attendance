@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\CommonCategory;
 use App\Company;
 use App\Leave;
 use Illuminate\Http\Request;
@@ -27,18 +26,16 @@ class LeaveController extends Controller
         }else{
             $limit = '10';
         }
+        
+        $leaves = Leave::with('company')->orderBy('id','asc')->Paginate($limit);
 
-        $category = CommonCategory::where('target', 'status')->first();
-        $leaves = Leave::with('company', 'common')->orderBy('id','asc')->Paginate($limit);
-
-        return view('leave.index', compact('leaves', 'category'));
+        return view('leave.index', compact('leaves'));
     }
     
     public function create()
     {
         $companies = Company::all();
-        $categories = CommonCategory::where('target', 'status')->get();
-        return view('leave.create', compact('companies', 'categories'));
+        return view('leave.create', compact('companies'));
     }
 
     public function store(Request $request)
@@ -50,41 +47,38 @@ class LeaveController extends Controller
             'status'      => 'required',
         ]);
   
-        $leave = new Leave();
-        $leave->company_id      = $request->company_id;
-        $leave->request_date = $request->request_date;
-        $leave->actual_date = $request->actual_date;
-        $leave->status = $request->status;
-        $leave->save();
+        $attendance = Leave::insert(
+            $request->only(
+                'company_id', 
+                'request_date', 
+                'actual_date', 
+                'status'));
         
         alert()->success('success','Leave has been Created!');
         return redirect('/leave');
     }
     
-    public function edit($id)
+    public function edit(Leave $leave)
     {
         $companies = Company::all();
-        $categories = CommonCategory::where('target', 'status')->get();
-        $leave = Leave::find($id);
-        return view('leave.edit', compact('leave', 'companies', 'categories'));
+        return view('leave.edit', compact('leave', 'companies'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Leave $leave)
     {
-        $leave = Leave::Find($id);
-        $leave->company_id      = $request->company_id;
-        $leave->request_date = $request->request_date;
-        $leave->actual_date = $request->actual_date;
-        $leave->status = $request->status;
-        $leave->save();
+        $leave->update([
+            'company_id' => $request->company_id,
+            'request_date' => $request->request_date,
+            'actual_date' => $request->actual_date,
+            'status' => $request->status
+        ]);
         
         alert()->success('success','Leave has been updated!');
         return redirect('/leave');
     }
 
-    public function destroy($id)
+    public function destroy(Leave $leave)
     {
-        $leave = Leave::find($id);
         $leave->delete();
         
         alert()->success('success','Leave has been Deleted!');

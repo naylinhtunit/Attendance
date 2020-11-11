@@ -42,15 +42,12 @@ return [
         ],
 
         'employee' => [
-            'driver' => 'session',
+            'driver' => 'passport',
             'provider' => 'employees',
         ],
-
-
         'api' => [
-            'driver' => 'token',
-            'provider' => 'users',
-            'hash' => false,
+            'driver' => 'passport',
+            'provider' => 'employees',
         ],
     ],
 

@@ -31,11 +31,11 @@
 						</div>
 					</div>
 					<div class="form-row">
-						@foreach($categories as $category)
+						@foreach(config('const.leaveStatus') as $key => $status)
 						<div class="form-group col-md-3">
 							<label class="custom-control custom-radio">
-								<input name="status" type="radio" class="custom-control-input @error('status') is-invalid @enderror" value="{{ $category->id }}">
-								<span class="custom-control-label">{{ $category->category }}</span>
+								<input name="status" type="radio" class="custom-control-input @error('status') is-invalid @enderror" value="{{ $key }}">
+								<span class="custom-control-label">{{ $status }}</span>
 							</label>
 						</div>
 						@endforeach

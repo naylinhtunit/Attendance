@@ -45,40 +45,38 @@ class LeaveTypeController extends Controller
             'leave_name'      => 'required',
             'total_leave'      => 'required'
         ]);
-  
-        $leaveType = new LeaveType();
-        $leaveType->company_id      = $request->company_id;
-        $leaveType->leave_name = $request->leave_name;
-        $leaveType->total_leave = $request->total_leave;
-        $leaveType->save();
+        
+        $leaveType = LeaveType::insert(
+            $request->only(
+                'company_id', 
+                'leave_name', 
+                'total_leave'));
         
         alert()->success('success','Leave Type has been Created!');
         return redirect('/leave_type');
     }
     
-    public function edit($id)
+    public function edit(LeaveType $leave)
     {
         $companies = Company::all();
-        $leave = LeaveType::find($id);
         return view('leave_type.edit', compact('leave', 'companies'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, LeaveType $leave)
     {
-        $leaveType = LeaveType::Find($id);
-        $leaveType->company_id = $request->input('company_id');
-        $leaveType->leave_name = $request->input('leave_name');
-        $leaveType->total_leave = $request->input('total_leave');
-        $leaveType->save();
+        $leave->update([
+            'company_id' => $request->company_id,
+            'leave_name' => $request->leave_name,
+            'total_leave' => $request->total_leave
+        ]);
         
         alert()->success('success','Leave Type has been updated!');
         return redirect('/leave_type');
     }
 
-    public function destroy($id)
+    public function destroy(LeaveType $leave)
     {
-        $leaveType = LeaveType::find($id);
-        $leaveType->delete();
+        $leave->delete();
         
         alert()->success('success','Leave Type has been Deleted!');
         return redirect('/leave_type');

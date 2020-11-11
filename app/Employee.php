@@ -3,15 +3,28 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
+use Laravel\Passport\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
-
+    /**
+     *  @OA\Schema(
+     *        @OA\Property( property="id",type="integer", example = 1),
+     *        @OA\Property( property="email",type="string", example = "hello@isme.com"),
+     *        @OA\Property( property="password",type="string", example = "password"),
+     *        @OA\Property( property="deleted_at",type="string", example = "2020-06-25 07:06:53"),
+     *        @OA\Property( property="created_at",type="string", example = "2020-06-25 07:06:53"),
+     *        @OA\Property( property="updated_at",type="string", example = "2020-06-25 07:06:53"),
+     *  ),    
+     * 
+     */
 class Employee extends Authenticatable
 {
 
     protected $table = 'employees';
+    protected $guard = 'employee';
 
-    use Notifiable;
+    use HasApiTokens,Notifiable;
 
+    
     /**
      * The attributes that are mass assignable.
      *
@@ -70,3 +83,23 @@ class Employee extends Authenticatable
         });
     }
 }
+
+    /**
+     *  @OA\Schema(
+     *        schema="EmployeeLogin",
+     *        @OA\Property(property="email",ref="#/components/schemas/Employee/properties/email"),
+     *        @OA\Property(property="password",ref="#/components/schemas/Employee/properties/password"),
+     *  ), 
+     *  @OA\Schema(
+     *        schema="RequestPasswordReset",
+     *        @OA\Property(property="email",ref="#/components/schemas/Employee/properties/email"),
+     *  ), 
+     *  @OA\Schema(
+     *        schema="ResetPassword",
+     *        @OA\Property(property="token",ref="#/components/schemas/PasswordReset/properties/token"),
+     *        @OA\Property(property="email",ref="#/components/schemas/Employee/properties/email"),
+     *        @OA\Property(property="password",ref="#/components/schemas/Employee/properties/password"),
+     *        @OA\Property(property="confirm_password",ref="#/components/schemas/Employee/properties/password"),
+     *  ),
+     */
+

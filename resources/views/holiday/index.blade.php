@@ -26,7 +26,7 @@
 							<td>{{ $holiday->company_id }}: {{ $holiday->company->company_name }}</td>
 							<td class="table-action">
 								<form action="{{ url('/holiday', $holiday->id) }}" method="post">
-									<a class="text-warning" href="{{ url('holiday/edit', $holiday->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
+									<a class="text-warning" href="{{ url('holiday/'. $holiday->id . '/edit') }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
 									@csrf
 									@method('DELETE')
 									<a class="text-danger" href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>

@@ -80,15 +80,15 @@ class CompanyController extends Controller
         return redirect('/company');
     }
 
-    public function edit($id)
+    public function edit($company)
     { 
-        $company = Company::find($id);
+        $company = Company::find($company);
         return view('company.edit', compact('company'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, $company)
     {
-        $company = Company::Find($id);
+        $company = Company::Find($company);
         $company->company_name = $request->input('company_name');
         $company->address = $request->input('address');
         $company->phone = $request->input('phone');
@@ -117,9 +117,9 @@ class CompanyController extends Controller
         return redirect('/company');
     }
 
-    public function destroy($id)
+    public function destroy($company)
     {
-        $company = Company::find($id);
+        $company = Company::find($company);
         $image_path = public_path().'/img/company/'.$company->avatar;
         if(File::exists($image_path)) {
             File::delete($image_path);

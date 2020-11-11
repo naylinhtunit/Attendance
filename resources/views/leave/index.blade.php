@@ -24,15 +24,13 @@
 							<td>{{ $leave->request_date }}</td>
 							<td>{{ $leave->actual_date }}</td>
 							<td>
-								@if($category->id == $leave->status) 
-								<span class="badge badge-success">{{ $leave->common->category }}</span>
-								@else
-								<span class="badge badge-warning">{{ $leave->common->category }}</span>
-								@endif
+								<span class="badge {{ $leave->status == '3' ? 'badge-success' : 'badge-warning' }}">
+									{{ $leave->status == '3' ? 'Approve' : 'Pending'}}
+								</span>
 							</td>
 							<td class="table-action">
 								<form action="{{ url('/leave', $leave->id) }}" method="post">
-									<a class="text-warning" href="{{ url('leave/edit', $leave->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
+									<a class="text-warning" href="{{ url('leave/' . $leave->id . '/edit') }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
 									@csrf
 									@method('DELETE')
 									<a class="text-danger" href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>

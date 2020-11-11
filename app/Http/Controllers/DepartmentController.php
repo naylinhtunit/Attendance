@@ -44,37 +44,35 @@ class DepartmentController extends Controller
             'department_name'   => 'required',
             'company_id'    => 'required'
         ]);
-  
-        $department = new Department;
-        $department->department_name = $request->department_name;
-        $department->company_id      = $request->company_id;
-        $department->save();
+        
+        $department = Department::insert(
+            $request->only(
+                'department_name', 
+                'company_id'));
         
         alert()->success('success','Department has been Created!');
         return redirect('/department');
     }
     
-    public function edit($id)
+    public function edit(Department $department)
     {
         $companies = Company::all();
-        $department = Department::find($id);
         return view('department.edit', compact('companies', 'department'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Department $department)
     {
-        $department = Department::Find($id);
-        $department->department_name = $request->input('department_name');
-        $department->company_id = $request->input('company_id');
-        $department->save();
+        $department->update([
+            'department_name' => $request->department_name,
+            'company_id' => $request->company_id
+        ]);
         
         alert()->success('success','Selected Department has been updated!');
         return redirect('/department');
     }
 
-    public function destroy($id)
+    public function destroy(Department $department)
     {
-        $department = Department::find($id);
         $department->delete();
         
         alert()->success('success','Selected Department has been Deleted!');

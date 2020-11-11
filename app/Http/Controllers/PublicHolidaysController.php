@@ -46,41 +46,39 @@ class PublicHolidaysController extends Controller
             'year'      => 'required',
             'company_id' => 'required'
         ]);
-  
-        $holiday = new PublicHolidays();
-        $holiday->holiday_name = $request->holiday_name;
-        $holiday->holiday_date = $request->holiday_date;
-        $holiday->year = $request->year;
-        $holiday->company_id      = $request->company_id;
-        $holiday->save();
+        
+        $holiday = PublicHolidays::insert(
+            $request->only(
+                'holiday_name', 
+                'holiday_date', 
+                'year',
+                'company_id'));
         
         alert()->success('success','Public Holidays has been Created!');
         return redirect('/holiday');
     }
     
-    public function edit($id)
+    public function edit(PublicHolidays $holiday)
     {
         $companies = Company::all();
-        $holiday = PublicHolidays::find($id);
         return view('holiday.edit', compact('holiday', 'companies'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, PublicHolidays $holiday)
     {
-        $holiday = PublicHolidays::Find($id);
-        $holiday->holiday_name = $request->input('holiday_name');
-        $holiday->holiday_date = $request->input('holiday_date');
-        $holiday->year = $request->input('year');
-        $holiday->company_id = $request->input('company_id');
-        $holiday->save();
+        $holiday->update([
+            'holiday_name' => $request->holiday_name,
+            'holiday_date' => $request->holiday_date,
+            'year' => $request->year,
+            'company_id' => $request->company_id
+        ]);
         
         alert()->success('success','Public Holidays has been updated!');
         return redirect('/holiday');
     }
 
-    public function destroy($id)
+    public function destroy(PublicHolidays $holiday)
     {
-        $holiday = PublicHolidays::find($id);
         $holiday->delete();
         
         alert()->success('success','Public Holidays has been Deleted!');

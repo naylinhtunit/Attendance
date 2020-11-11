@@ -22,7 +22,7 @@
 							<td>{{ $department->company_id }}: {{ $department->company->company_name }}</td>
 							<td class="table-action">
 								<form action="{{ url('/department', $department->id) }}" method="post">
-									<a class="text-warning" href="{{ url('department/edit', $department->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
+									<a class="text-warning" href="{{ url('department/'. $department->id . '/edit') }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
 									@csrf
 									@method('DELETE')
 									<a class="text-danger" href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>

@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Company;
 use App\Department;
 use App\Employee;
-use App\CommonCategory;
 use App\Role;
 use File;
 use Illuminate\Support\Facades\Storage;
@@ -37,8 +36,7 @@ class EmployeeController extends Controller
         $companies = Company::all();
         $departments = Department::all();
         $roles = Role::all();
-        $categories = CommonCategory::where('target', 'gender')->get();
-        return view('employee.create', compact('companies', 'departments', 'roles', 'categories'));
+        return view('employee.create', compact('companies', 'departments', 'roles'));
     }
     
     public function store(Request $request)
@@ -52,26 +50,24 @@ class EmployeeController extends Controller
         return redirect('/employee');
     }
     
-    public function edit($id)
+    public function edit($employee)
     {
         $companies = Company::all();
         $departments = Department::all();
         $roles = Role::all();
-        $categories = CommonCategory::where('target', 'gender')->get();
-        $employee = Employee::find($id);
-        return view('employee.edit', compact('employee', 'companies', 'departments', 'roles', 'categories'));
+        $employee = Employee::find($employee);
+        return view('employee.edit', compact('employee', 'companies', 'departments', 'roles'));
     }
     
-    public function update(Request $request, $id)
+    public function update(Request $request, $employee)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::find($employee);
         if($request->hasFile('image')){
             $image_path = public_path().'/img/employee/'.$employee->image;
             if(File::exists($image_path)) {
                 File::delete($image_path);
             }
             $filename = $this->handleImageUpload($request);
-            // Storage::deleteDirectory('public/img/employee/'.$employee->image);
         }else{
             $filename = '';
         }
@@ -82,9 +78,9 @@ class EmployeeController extends Controller
         return redirect('/employee');
     }
     
-    public function destroy($id)
+    public function destroy($employee)
     {   
-        $employee = Employee::find($id);
+        $employee = Employee::find($employee);
         $image_path = public_path().'/img/employee/'.$employee->image;
         if(File::exists($image_path)) {
             File::delete($image_path);
@@ -95,7 +91,7 @@ class EmployeeController extends Controller
         return redirect('/employee');
     }
     
-    private function validateRequest(Request $request, $id)
+    private function validateRequest(Request $request, $employee)
     {
         $this->validate($request,[
             'company_id'   =>  'required',
@@ -107,9 +103,9 @@ class EmployeeController extends Controller
             'resign_date'    =>  'required',
             'gender'    =>  'required',
             'salary'    =>  'required',
-            'name'     =>  'required|unique:employees,name,'.($id ? : '' ).'|min:3',
-            'password'     =>  ''.( $id ? 'nullable|min:7' : 'required|min:7' ),
-            'email'        =>  'required|email|unique:employees,email,'.($id ? : '' ).'|min:7',
+            'name'     =>  'required|unique:employees,name,'.($employee ? : '' ).'|min:3',
+            'password'     =>  ''.( $employee ? 'nullable|min:7' : 'required|min:7' ),
+            'email'        =>  'required|email|unique:employees,email,'.($employee ? : '' ).'|min:7',
             'image'      =>  ''.($request->hasFile('image')  ? 'required|image|max:1999' : '')
         ]);
     }

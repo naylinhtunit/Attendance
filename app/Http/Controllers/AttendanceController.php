@@ -53,45 +53,44 @@ class AttendanceController extends Controller
             'checkin_time' => 'required',
             'checkout_time' => 'required',
         ]);
-  
-        $attendance = new Attendance();
-        $attendance->company_id      = $request->company_id;
-        $attendance->employee_id = $request->employee_id;
-        $attendance->role_id = $request->role_id;
-        $attendance->checkin_time = $request->checkin_time;
-        $attendance->checkout_time = $request->checkout_time;
-        $attendance->save();
+        
+        $attendance = Attendance::insert(
+            $request->only(
+                'company_id', 
+                'employee_id', 
+                'role_id', 
+                'checkin_time', 
+                'checkout_time'));
         
         alert()->success('success','Attendance has been Created!');
         return redirect('/attendance');
     }
     
-    public function edit($id)
+    public function edit(Attendance $attendance)
     {
         $companies = Company::all();
         $employees = Employee::all();
         $roles = Role::all();
-        $attendance = Attendance::find($id);
+        
         return view('attendance.edit', compact('attendance', 'companies', 'employees', 'roles'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Attendance $attendance)
     {
-        $attendance = Attendance::Find($id);
-        $attendance->company_id      = $request->company_id;
-        $attendance->employee_id = $request->employee_id;
-        $attendance->role_id = $request->role_id;
-        $attendance->checkin_time = $request->checkin_time;
-        $attendance->checkout_time = $request->checkout_time;
-        $attendance->save();
+        $attendance->update([
+            'company_id' => $request->company_id,
+            'employee_id' => $request->employee_id,
+            'role_id' => $request->role_id,
+            'checkin_time' => $request->checkin_time,
+            'checkout_time' => $request->checkout_time
+        ]);
         
         alert()->success('success','Selected attendance has been updated!');
         return redirect('/attendance');
     }
 
-    public function destroy($id)
+    public function destroy(Attendance $attendance)
     {
-        $attendance = Attendance::find($id);
         $attendance->delete();
         
         alert()->success('success','Selected attendance has been Deleted!');

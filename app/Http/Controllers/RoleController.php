@@ -47,40 +47,38 @@ class RoleController extends Controller
             'company_id' => 'required',
             'department_id' => 'required'
         ]);
-  
-        $role = new Role;
-        $role->role_name = $request->role_name;
-        $role->company_id      = $request->company_id;
-        $role->department_id      = $request->department_id;
-        $role->save();
+        
+        $role = Role::insert(
+            $request->only(
+                'role_name', 
+                'company_id', 
+                'department_id'));
         
         alert()->success('success','Role has been Created!');
         return redirect('/role');
     }
     
-    public function edit($id)
+    public function edit(Role $role)
     {
         $companies = Company::all();
         $departments = Department::all();
-        $role = Role::find($id);
         return view('role.edit', compact('role', 'companies', 'departments'));
     }
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Role $role)
     {
-        $role = Role::Find($id);
-        $role->role_name = $request->input('role_name');
-        $role->company_id = $request->input('company_id');
-        $role->department_id = $request->input('department_id');
-        $role->save();
+        $role->update([
+            'role_name' => $request->role_name,
+            'company_id' => $request->company_id,
+            'department_id' => $request->department_id
+        ]);
         
         alert()->success('success','Selected Role has been updated!');
         return redirect('/role');
     }
 
-    public function destroy($id)
+    public function destroy(Role $role)
     {
-        $role = Role::find($id);
         $role->delete();
         
         alert()->success('success','Selected Role has been Deleted!');

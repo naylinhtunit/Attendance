@@ -36,7 +36,7 @@
 							<td>{{ $employee->address }}</td>
 							<td class="table-action">
 								<form action="{{ route('employee.destroy', $employee->id) }}" method="post">
-									<a class="text-warning" href="{{ route('employee.edit', $employee->id) }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
+									<a class="text-warning" href="{{ url('employee/' . $employee->id . '/edit') }}"><i class="align-middle mr-2" data-feather="edit"></i></a>
 									@csrf
 									@method('DELETE')
 									<a class="text-danger" href="javascript:void(0);" onclick="$(this).closest('form').submit();"><i class="align-middle" data-feather="trash"></i></a>

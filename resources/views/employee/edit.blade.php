@@ -53,8 +53,8 @@
 					<div class="form-group">
 						<label>Gender</label>
 						<select name="gender" class="form-control">
-							@foreach($categories as $category)
-								<option value="{{ $category->id }}" @if($employee->gender == $category->id) selected @endif>{{ $category->id }}: {{ $category->category }}</option>
+							@foreach(config('const.gender') as $key => $gender)
+								<option value="{{ $key }}" @if($key == $employee->gender) selected @endif>{{ $gender }}</option>
 							@endforeach
 						</select>
 					</div>
